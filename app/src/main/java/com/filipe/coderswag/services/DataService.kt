@@ -3,10 +3,10 @@ package com.filipe.coderswag.services
 import com.filipe.coderswag.model.Category
 import com.filipe.coderswag.model.Product
 /*
-** Created by Filipe Augusto 06/18/2019
+** Created by Filipe Augusto 06/18/2019/?
  */
 object DataService {
-    var category = listOf(
+    var categories = listOf(
 
         Category("SHIRTS", "shirtimage"),
         Category("HOODIES", "hoodieimage"),
@@ -16,10 +16,10 @@ object DataService {
 
     var hats = listOf(
 
-        Product("Devslopes Green blue-sky", "$18", "hat01"),
-        Product("Devslopes White hat", "$12", "hat02"),
-        Product("Devslopes Graphic Josh", "$16", "hat03"),
-        Product("Devslopes Black hat", "$14", "hat04")
+        Product("Devslopes Green blue-sky", "$18", "hat1"),
+        Product("Devslopes White hat", "$12", "hat2"),
+        Product("Devslopes Graphic Josh", "$16", "hat3"),
+        Product("Devslopes Black hat", "$14", "hat4")
     )
 
     var hoodies = listOf(
