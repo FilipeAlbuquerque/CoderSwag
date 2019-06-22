@@ -1,5 +1,6 @@
 package com.filipe.coderswag.controller
 
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import com.filipe.coderswag.R
 import com.filipe.coderswag.adapters.ProductsAdapter
 import com.filipe.coderswag.services.DataService
 import com.filipe.coderswag.utilities.EXTRA_CATEGORY
+import com.filipe.coderswag.utilities.EXTRA_PRODUCT
 import kotlinx.android.synthetic.main.activity_product.*
 
 class ProductActivity : AppCompatActivity() {
@@ -19,7 +21,12 @@ class ProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
         val categoryType = intent.getStringExtra(EXTRA_CATEGORY)
-        adapter = ProductsAdapter(this, DataService.getProducts(categoryType))
+        adapter = ProductsAdapter(this, DataService.getProducts(categoryType)) { product ->
+            val productDetailIntent = Intent(this, ProductDetailActivity::class.java)
+            productDetailIntent.putExtra(EXTRA_PRODUCT, product)
+            startActivity(productDetailIntent)
+        }
+
         productListView.adapter = adapter
 
         //changing the columns depending of the orientation

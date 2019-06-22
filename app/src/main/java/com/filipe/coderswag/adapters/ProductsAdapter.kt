@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.filipe.coderswag.R
 import com.filipe.coderswag.model.Product
 
-class ProductsAdapter(private val context: Context, private  val products: List<Product>) : RecyclerView.Adapter<ProductsAdapter.ProductHolder>() {
+class ProductsAdapter(private val context: Context, private  val products: List<Product>, private val itemClick: (Product) -> Unit) : RecyclerView.Adapter<ProductsAdapter.ProductHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.product_list, parent, false)
-        return ProductHolder(view)
+        return ProductHolder(view, itemClick)
     }
 
     override fun getItemCount(): Int {
@@ -25,16 +25,17 @@ class ProductsAdapter(private val context: Context, private  val products: List<
         holder.bindProduct(products[position], context)
     }
 
-    inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val productImage = itemView.findViewById<ImageView>(R.id.productImage)
-        val productName = itemView.findViewById<TextView>(R.id.productName)
-        val productPrice = itemView.findViewById<TextView>(R.id.productPrice)
+    inner class ProductHolder(itemView: View, val itemClick: (Product) -> Unit) : RecyclerView.ViewHolder(itemView) {
+        private val productImage = itemView.findViewById<ImageView>(R.id.productImage)
+        private val productName = itemView.findViewById<TextView>(R.id.productName)
+        private val productPrice = itemView.findViewById<TextView>(R.id.productPrice)
 
         fun bindProduct(product : Product, context: Context){
             val resourId = context.resources.getIdentifier(product.image, "drawable", context.packageName)
             productImage.setImageResource(resourId)
             productName.text = product.title
             productPrice.text = product.price
+            itemView.setOnClickListener { itemClick(product) }
         }
     }
 }
